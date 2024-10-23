@@ -6,19 +6,62 @@ body {
     align-items: center;
     margin: 0;
     font-size: 12px;
+    position: relative; /* Para posicionar a estrela e os planetas de forma correta */
 }
 
+/* Estrela de Nêutrons */
+.star-neutron {
+    width: 10em;
+    height: 10em;
+    background: radial-gradient(circle, 
+      rgba(255, 255, 255, 1) 30%,  /* Brilho intenso no centro */
+      rgba(0, 102, 255, 0.8) 60%,  /* Azul brilhante */
+      rgba(75, 0, 130, 0.6) 100%   /* Roxo */
+    );
+    border-radius: 50%;
+    box-shadow: 
+    0 0 30px rgba(255, 255, 255, 0.8), 
+    0 0 60px rgba(75, 0, 130, 0.6),
+    0 0 120px rgba(0, 102, 255, 0.6);
+    animation: pulse 2s infinite ease-in-out; /* Pulsação de energia */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.8), 
+        0 0 80px rgba(75, 0, 130, 0.6),
+        0 0 150px rgba(0, 102, 255, 0.6);
+    }
+    50% {
+        box-shadow: 
+        0 0 60px rgba(255, 255, 255, 0.9), 
+        0 0 120px rgba(75, 0, 130, 0.8),
+        0 0 200px rgba(0, 102, 255, 0.8);
+    }
+}
+
+/* Planeta Orbitando */
 .planet {
     width: 30em;
     height: 30em;
-    background: rgb(0, 102, 255);
+    background: radial-gradient(circle, 
+      rgba(128, 128, 128, 1) 50%,  /* Cinza metálico */
+      rgba(105, 105, 105, 1) 80%,  /* Superfície rochosa */
+      rgba(30, 30, 30, 1) 100%     /* Tons mais escuros e frios */
+    );
     border-radius: 50%;
-    box-shadow: 
-    0 0 20px rgba(0, 102, 255, 0.8), 
-    0 0 50px rgba(0, 102, 255, 0.6);
+    box-shadow: 0 0 30px rgba(128, 128, 128, 0.5),  /* Brilho suave */
+                0 0 80px rgba(255, 69, 0, 0.3),   /* Efeito de radiação */
+                0 0 150px rgba(75, 0, 130, 0.6);  /* Radiação roxa */
     position: relative;
 }
 
+/* Satélite Orbitando o Planeta */
 .satellite, .satellite::after {
     content: "";
     position: absolute;
