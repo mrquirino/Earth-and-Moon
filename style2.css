@@ -6,157 +6,141 @@ body {
     align-items: center;
     margin: 0;
     font-size: 12px;
-    position: relative; /* Para posicionar a estrela e os planetas de forma correta */
+    position: relative;
 }
 
 /* Estrela de Nêutrons */
 .star-neutron {
     width: 10em;
     height: 10em;
-    background: radial-gradient(circle, 
-      rgba(255, 255, 255, 1) 30%,  /* Brilho intenso no centro */
-      rgba(0, 102, 255, 0.8) 60%,  /* Azul brilhante */
-      rgba(75, 0, 130, 0.6) 100%   /* Roxo */
-    );
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 1) 30%,
+            /* Brilho intenso no centro */
+            rgba(0, 102, 255, 0.8) 60%,
+            /* Azul brilhante */
+            rgba(75, 0, 130, 0.6) 100%
+            /* Roxo */
+        );
     border-radius: 50%;
-    box-shadow: 
-    0 0 30px rgba(255, 255, 255, 0.8), 
-    0 0 60px rgba(75, 0, 130, 0.6),
-    0 0 120px rgba(0, 102, 255, 0.6);
-    animation: pulse 2s infinite ease-in-out; /* Pulsação de energia */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes pulse {
-    0%, 100% {
-        box-shadow: 
-        0 0 40px rgba(255, 255, 255, 0.8), 
-        0 0 80px rgba(75, 0, 130, 0.6),
-        0 0 150px rgba(0, 102, 255, 0.6);
-    }
-    50% {
-        box-shadow: 
-        0 0 60px rgba(255, 255, 255, 0.9), 
-        0 0 120px rgba(75, 0, 130, 0.8),
-        0 0 200px rgba(0, 102, 255, 0.8);
-    }
-}
-
-/* Planeta Orbitando */
-.planet {
-    width: 30em;
-    height: 30em;
-    background: radial-gradient(circle, 
-      rgba(128, 128, 128, 1) 50%,  /* Cinza metálico */
-      rgba(105, 105, 105, 1) 80%,  /* Superfície rochosa */
-      rgba(30, 30, 30, 1) 100%     /* Tons mais escuros e frios */
-    );
-    border-radius: 50%;
-    box-shadow: 0 0 30px rgba(128, 128, 128, 0.5),  /* Brilho suave */
-                0 0 80px rgba(255, 69, 0, 0.3),   /* Efeito de radiação */
-                0 0 150px rgba(75, 0, 130, 0.6);  /* Radiação roxa */
+    box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 60px rgba(75, 0, 130, 0.6),
+        0 0 120px rgba(0, 102, 255, 0.6);
     position: relative;
+    animation: pulse 2s infinite ease-in-out, rotate 10s infinite linear;
+    /* Pulsação e rotação */
 }
 
-/* Satélite Orbitando o Planeta */
-.satellite, .satellite::after {
-    content: "";
+/* Campos Magnéticos */
+.magnetic-field {
+    /* ... outros estilos ... */
+    border: 2px solid rgba(0, 102, 255, 1);
+    /* Borda sólida e visível */
+    background: radial-gradient(circle, transparent 40%, rgba(0, 102, 255, 0.2) 100%);
+    /* Gradiente sutil */
+
+    /* Classes auxiliares para as sombras */
+    .magnetic-field-inner-shadow {
+        box-shadow: 0 0 30px rgba(0, 102, 255, 0.8);
+    }
+
+    .magnetic-field-outer-shadow {
+        box-shadow: 0 0 50px rgba(0, 102, 255, 0.5);
+    }
+
+    /* Aplicando as sombras usando pseudo-elementos */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        /*.magnetic-field-inner-shadow;*/
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+       /* .magnetic-field-outer-shadow ;*/
+        transform: scale(1.1);
+    }
+}
+
+/* Jatos de Energia */
+.energy-jet {
     position: absolute;
-    width: 5em;
-    height: 5em;
-    border-radius: 50%;
+    width: 0.5em;
+    height: 20em;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.8),
+            rgba(0, 102, 255, 0.6),
+            rgba(75, 0, 130, 0.4));
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0.25em;
+    animation: energy-pulse 3s infinite ease-in-out;
 }
 
-.satellite {
-    background: radial-gradient(circle, 
-      rgb(0, 51, 102) 60%,  
-      rgb(34, 139, 34) 65%,  
-      rgb(240, 248, 255) 70%  
-    );
-
-    box-shadow: 0 0 20px rgba(0, 51, 102, 0.8),
-     0 0 50px rgba(0, 51, 102, 0.6);
-    border-radius: 50%;
-
-    overflow: hidden;
-    transition: 250ms;
-    left: 32em;
-    transform: rotate(20deg);
-    animation: round 5s infinite ease-in-out;
+.energy-jet.top {
+    top: -12em;
+    /* Jato saindo pelo topo */
 }
 
-.satellite::after {
-    background: #2a2a2a;
-    width: 2.5em;
-    left: 2.5em;
-    box-shadow: 0 0 0.75em 0.95em #2a2a2a;
-    animation: shadow 5s infinite ease-in-out;
+.energy-jet.bottom {
+    top: auto;
+    bottom: -12em;
+    /* Jato saindo pela parte de baixo */
 }
 
-@keyframes shadow {
-    0% {
-        width: 2.5em;
-        left: 0;
+/* Animações */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
     }
 
-    25% {
-        width: 5em;
-        left: 0;
-    }
-
-    50% {
-        width: 2.5em;
-        left: 2.5em;
-    }
-
-    75% {
-        width: 0em;
-        left: 5em;
-    }
-
-    80% {
-        left: 0;
-        box-shadow: 0 0 0.55em 0.75em #262938;
-    }
-
-    100% {
-        width: 2.5em;
-        left: 0;
+    to {
+        transform: rotate(360deg);
     }
 }
 
-@keyframes round {
+@keyframes energy-pulse {
+
     0%,
     100% {
-        top: 2em;
-        left: -15em;
-        box-shadow: -2em 0 5em 0.5em #c6836466;
-        z-index: 2;
-    }
-
-    25% {
-        box-shadow: 0 0 3em 1em #412104b5;
-    }
-
-    75% {
-        box-shadow: 0 0 3em 1em black;
-    }
-
-    48% {
-        z-index: 2;
+        height: 20em;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
     }
 
     50% {
-        left: 40em;
-        top: 20em;
-        z-index: -1;
-        box-shadow: 2em 0 5em 0.5em #845a4682;
+        height: 25em;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.9);
+    }
+}
+
+/* Pulsação da estrela */
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 40px rgba(255, 255, 255, 0.8),
+            0 0 80px rgba(75, 0, 130, 0.6),
+            0 0 150px rgba(0, 102, 255, 0.6);
     }
 
-    99% {
-        z-index: -1;
+    50% {
+        box-shadow:
+            0 0 60px rgba(255, 255, 255, 0.9),
+            0 0 120px rgba(75, 0, 130, 0.8),
+            0 0 200px rgba(0, 102, 255, 0.8);
     }
 }

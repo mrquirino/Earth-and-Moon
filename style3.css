@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.quasar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.core {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #ffffff, #ffcc00, #990000);
+    border-radius: 50%;
+    box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.beam {
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    animation: flicker 1.5s infinite;
+}
+
+.beam-top {
+    transform: rotate(25deg) translateY(-50%);
+    left: 50%;
+    transform-origin: bottom;
+}
+
+.beam-bottom {
+    transform: rotate(-25deg) translateY(-50%);
+    right: 50%;
+    transform-origin: top;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
